@@ -6,10 +6,11 @@ using StringTools;
 
 class BGSprite extends FlxSprite
 {
-	private var idleAnim:Array<String>;
+	private var idleAnim:String;
 
 	// KADEDEV DO NOT FUCKING COPY THIS FOR THE LAST TIME.
-	public function new(name:String, x:Float, y:Float, ?scrollX:Float = 1, ?scrollY:Float = 1, ?idleAnim:Array<String>, ?isLoop:Bool = false)
+	// Whats up with Kade stealing ppls code. He already stole code from downscroll and openFnf.
+	public function new(name:String, x:Float, y:Float, ?scrollX:Float = 1, ?scrollY:Float = 1, ?idleAnim:String, ?isLoop:Bool = false)
 	{
 		super(x, y);
 
@@ -31,7 +32,7 @@ class BGSprite extends FlxSprite
             // trace('KadeDev is ew: ${idleAnim}');
 			for (i in 0...idleAnim.length)
 			{
-				animation.addByPrefix(idleAnim[i], idleAnim[i], 24, isLoop);
+				animation.addByPrefix('dance', idleAnim, 24, isLoop);
 			}
 
 			dance();
@@ -45,7 +46,7 @@ class BGSprite extends FlxSprite
 		if (idleAnim != null)
 		{
 			// KadeEngine is bad it be lookin like dream.
-			animation.play(idleAnim[0]);
+			animation.play('dance');
 		}
 	}
 }

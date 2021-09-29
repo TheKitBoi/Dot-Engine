@@ -94,15 +94,16 @@ class PlayState extends MusicBeatState
 	var trainSound:FlxSound;
 
 	var foregroundSprites:FlxTypedGroup<BGSprite>;
+	var backgroundSprites:FlxTypedGroup<BGSprite>;
 
 	var limo:BGSprite;
 	var grpLimoDancers:FlxTypedGroup<BackgroundDancer>;
 	var fastCar:BGSprite;
 	var overlayShit:BGSprite;
 
-	var upperBoppers:FlxSprite;
+	/*var upperBoppers:FlxSprite;
 	var bottomBoppers:FlxSprite;
-	var santa:FlxSprite;
+	var santa:FlxSprite;*/
 
 	var bgGirls:BackgroundGirls;
 	var wiggleShit:WaveShader = new WaveShader();
@@ -166,6 +167,7 @@ class PlayState extends MusicBeatState
 		Conductor.changeBPM(SONG.bpm);
 
 		foregroundSprites = new FlxTypedGroup<BGSprite>();
+		backgroundSprites = new FlxTypedGroup<BGSprite>();
 
 		#if discord_rpc
 		initDiscord();
@@ -225,7 +227,7 @@ class PlayState extends MusicBeatState
 					var skyBG:BGSprite = new BGSprite('limoSunset', -120, -50, 0.1, 0.1);
 					add(skyBG);
 
-					var bgLimo:BGSprite = new BGSprite('bgLimo', -200, 480, 0.4, 0.4, ['background limo pink']);
+					var bgLimo:BGSprite = new BGSprite('bgLimo', -200, 480, 0.4, 0.4, 'background limo pink');
 					add(bgLimo);
 
 					grpLimoDancers = new FlxTypedGroup<BackgroundDancer>();
@@ -239,7 +241,7 @@ class PlayState extends MusicBeatState
 
 					add(grpLimoDancers);
 
-					limo = new BGSprite('limoDrive', -120, 550, 1, 1, ['Limo stage']);
+					limo = new BGSprite('limoDrive', -120, 550, 1, 1, 'Limo stage');
 
 					fastCar = new BGSprite('fastCarLol', -300, 160);
 
@@ -251,80 +253,9 @@ class PlayState extends MusicBeatState
 					add(overlayShit);
 				}
 			case 'mall':
-				{
-					defaultCamZoom = 0.80;
-
-					var bg:FlxSprite = new FlxSprite(-1000, -500).loadGraphic(Paths.image('christmas/bgWalls'));
-					bg.antialiasing = true;
-					bg.scrollFactor.set(0.2, 0.2);
-					bg.active = false;
-					bg.setGraphicSize(Std.int(bg.width * 0.8));
-					bg.updateHitbox();
-					add(bg);
-
-					upperBoppers = new FlxSprite(-240, -90);
-					upperBoppers.frames = Paths.getSparrowAtlas('christmas/upperBop');
-					upperBoppers.animation.addByPrefix('bop', "Upper Crowd Bob", 24, false);
-					upperBoppers.antialiasing = true;
-					upperBoppers.scrollFactor.set(0.33, 0.33);
-					upperBoppers.setGraphicSize(Std.int(upperBoppers.width * 0.85));
-					upperBoppers.updateHitbox();
-					add(upperBoppers);
-
-					var bgEscalator:FlxSprite = new FlxSprite(-1100, -600).loadGraphic(Paths.image('christmas/bgEscalator'));
-					bgEscalator.antialiasing = true;
-					bgEscalator.scrollFactor.set(0.3, 0.3);
-					bgEscalator.active = false;
-					bgEscalator.setGraphicSize(Std.int(bgEscalator.width * 0.9));
-					bgEscalator.updateHitbox();
-					add(bgEscalator);
-
-					var tree:FlxSprite = new FlxSprite(370, -250).loadGraphic(Paths.image('christmas/christmasTree'));
-					tree.antialiasing = true;
-					tree.scrollFactor.set(0.40, 0.40);
-					add(tree);
-
-					bottomBoppers = new FlxSprite(-300, 140);
-					bottomBoppers.frames = Paths.getSparrowAtlas('christmas/bottomBop');
-					bottomBoppers.animation.addByPrefix('bop', 'Bottom Level Boppers', 24, false);
-					bottomBoppers.antialiasing = true;
-					bottomBoppers.scrollFactor.set(0.9, 0.9);
-					bottomBoppers.setGraphicSize(Std.int(bottomBoppers.width * 1));
-					bottomBoppers.updateHitbox();
-					add(bottomBoppers);
-
-					var fgSnow:FlxSprite = new FlxSprite(-600, 700).loadGraphic(Paths.image('christmas/fgSnow'));
-					fgSnow.active = false;
-					fgSnow.antialiasing = true;
-					add(fgSnow);
-
-					santa = new FlxSprite(-840, 150);
-					santa.frames = Paths.getSparrowAtlas('christmas/santa');
-					santa.animation.addByPrefix('idle', 'santa idle in fear', 24, false);
-					santa.antialiasing = true;
-					add(santa);
-				}
+				loadStage('mall');
 			case 'mall-evil':
-				{
-					loadStage('mall-evil');
-
-					var bg:FlxSprite = new FlxSprite(-400, -500).loadGraphic(Paths.image('christmas/evilBG'));
-					bg.antialiasing = true;
-					bg.scrollFactor.set(0.2, 0.2);
-					bg.active = false;
-					bg.setGraphicSize(Std.int(bg.width * 0.8));
-					bg.updateHitbox();
-					add(bg);
-
-					var evilTree:FlxSprite = new FlxSprite(300, -300).loadGraphic(Paths.image('christmas/evilTree'));
-					evilTree.antialiasing = true;
-					evilTree.scrollFactor.set(0.2, 0.2);
-					add(evilTree);
-
-					var evilSnow:FlxSprite = new FlxSprite(-200, 700).loadGraphic(Paths.image("christmas/evilSnow"));
-					evilSnow.antialiasing = true;
-					add(evilSnow);
-				}
+				loadStage('mall-evil');
 			case 'school':
 				{
 					var bgSky = new FlxSprite().loadGraphic(Paths.image('weebSky'));
@@ -436,18 +367,18 @@ class PlayState extends MusicBeatState
 					tankRuins.updateHitbox();
 					add(tankRuins);
 
-					var smokeLeft:BGSprite = new BGSprite('smokeLeft', -200, -100, 0.4, 0.4, ['SmokeBlurLeft'], true);
+					var smokeLeft:BGSprite = new BGSprite('smokeLeft', -200, -100, 0.4, 0.4, 'SmokeBlurLeft', true);
 					add(smokeLeft);
 
-					var smokeRight:BGSprite = new BGSprite('smokeRight', 1100, -100, 0.4, 0.4, ['SmokeRight'], true);
+					var smokeRight:BGSprite = new BGSprite('smokeRight', 1100, -100, 0.4, 0.4, 'SmokeRight', true);
 					add(smokeRight);
 
 					// TankGround.
 
-					tankWatchtower = new BGSprite('tankWatchtower', 100, 50, 0.5, 0.5, ['watchtower gradient color']);
+					tankWatchtower = new BGSprite('tankWatchtower', 100, 50, 0.5, 0.5, 'watchtower gradient color');
 					add(tankWatchtower);
 
-					tankRolling = new BGSprite('tankRolling', 300, 300, 0.5, 0.5, ['BG tank w lighting'], true);
+					tankRolling = new BGSprite('tankRolling', 300, 300, 0.5, 0.5, 'BG tank w lighting', true);
 					add(tankRolling);
 
 					tankmenRun = new FlxTypedGroup<TankmenBG>();
@@ -460,22 +391,22 @@ class PlayState extends MusicBeatState
 
 					moveTank();
 
-					var fgTank0:BGSprite = new BGSprite('tank0', -500, 650, 1.7, 1.5, ['fg']);
+					var fgTank0:BGSprite = new BGSprite('tank0', -500, 650, 1.7, 1.5, 'fg');
 					foregroundSprites.add(fgTank0);
 
-					var fgTank1:BGSprite = new BGSprite('tank1', -300, 750, 2, 0.2, ['fg']);
+					var fgTank1:BGSprite = new BGSprite('tank1', -300, 750, 2, 0.2, 'fg');
 					foregroundSprites.add(fgTank1);
 
-					var fgTank2:BGSprite = new BGSprite('tank2', 450, 940, 1.5, 1.5, ['foreground']);
+					var fgTank2:BGSprite = new BGSprite('tank2', 450, 940, 1.5, 1.5, 'foreground');
 					foregroundSprites.add(fgTank2);
 
-					var fgTank4:BGSprite = new BGSprite('tank4', 1300, 900, 1.5, 1.5, ['fg']);
+					var fgTank4:BGSprite = new BGSprite('tank4', 1300, 900, 1.5, 1.5, 'fg');
 					foregroundSprites.add(fgTank4);
 
-					var fgTank5:BGSprite = new BGSprite('tank5', 1620, 700, 1.5, 1.5, ['fg']);
+					var fgTank5:BGSprite = new BGSprite('tank5', 1620, 700, 1.5, 1.5, 'fg');
 					foregroundSprites.add(fgTank5);
 
-					var fgTank3:BGSprite = new BGSprite('tank3', 1300, 1200, 3.5, 2.5, ['fg']);
+					var fgTank3:BGSprite = new BGSprite('tank3', 1300, 1200, 3.5, 2.5, 'fg');
 					foregroundSprites.add(fgTank3);
 				}
 			case 'stage':
@@ -498,6 +429,8 @@ class PlayState extends MusicBeatState
 					add(stageCurtains);
 				}
 		}
+
+		add(backgroundSprites);
 
 		gf = new Character(400, 130, SONG.gf);
 		gf.scrollFactor.set(0.95, 0.95);
@@ -1337,9 +1270,31 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	function loadStage(stage:String)
+	function loadStage(name:String)
 	{
-		// This
+		var access = Stage.accessXml(name);
+
+		if (access.has.camZoom)
+			defaultCamZoom = Std.parseFloat(access.att.camZoom);
+
+		for (img in access.nodes.image)
+		{
+			var imgX:Float = img.has.x ? Std.parseFloat(img.att.x) : 0;
+			var imgY:Float = img.has.y ? Std.parseFloat(img.att.y) : 0;
+
+			var imgScrollX:Float = img.has.scrollX ? Std.parseFloat(img.att.scrollX) : 1;
+			var imgScrollY:Float = img.has.scrollY ? Std.parseFloat(img.att.scrollY) : 1;
+
+			var imgAnimations:String = img.has.animation ? img.att.animation : null;
+
+			var bg:BGSprite = new BGSprite(img.att.name, imgX, imgY, imgScrollX, imgScrollY, imgAnimations);
+			if (img.has.size)
+			{
+				bg.setGraphicSize(Std.int(bg.width * Std.parseFloat(img.att.size)));
+				bg.updateHitbox();
+			}
+			backgroundSprites.add(bg);
+		}
 	}
 
 	function tweenCamIn():Void
@@ -2550,16 +2505,21 @@ class PlayState extends MusicBeatState
 			spr.dance();
 		});
 
+		backgroundSprites.forEach(function(spr:BGSprite)
+		{
+			spr.dance();
+		});
+
 		// boppin friends
 		switch (curStage.toLowerCase())
 		{
 			case 'school':
 				bgGirls.dance();
 
-			case 'mall':
+			/*case 'mall':
 				upperBoppers.animation.play('bop', true);
 				bottomBoppers.animation.play('bop', true);
-				santa.animation.play('idle', true);
+				santa.animation.play('idle', true);*/
 
 			case 'limo':
 				grpLimoDancers.forEach(function(dancer:BackgroundDancer)
