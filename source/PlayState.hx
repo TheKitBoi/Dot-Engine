@@ -252,10 +252,6 @@ class PlayState extends MusicBeatState
 					overlayShit.color = FlxColor.RED;
 					add(overlayShit);
 				}
-			case 'mall':
-				loadStage('mall');
-			case 'mall-evil':
-				loadStage('mall-evil');
 			case 'school':
 				{
 					var bgSky = new FlxSprite().loadGraphic(Paths.image('weebSky'));
@@ -409,25 +405,8 @@ class PlayState extends MusicBeatState
 					var fgTank3:BGSprite = new BGSprite('tank3', 1300, 1200, 3.5, 2.5, 'fg');
 					foregroundSprites.add(fgTank3);
 				}
-			case 'stage':
-				{
-					defaultCamZoom = 0.9;
-
-					loadStage('stage');
-
-					var bg:BGSprite = new BGSprite('stageback', -600, -200, 0.9, 0.9);
-					add(bg);
-
-					var stageFront:BGSprite = new BGSprite('stagefront', -650, 600, 0.9, 0.9);
-					stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
-					stageFront.updateHitbox();
-					add(stageFront);
-
-					var stageCurtains:BGSprite = new BGSprite('stagecurtains', -500, -300, 1.3, 1.3);
-					stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
-					stageCurtains.updateHitbox();
-					add(stageCurtains);
-				}
+			default:
+				loadStage(curStage.toLowerCase());
 		}
 
 		add(backgroundSprites);

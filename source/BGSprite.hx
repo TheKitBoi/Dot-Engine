@@ -46,7 +46,7 @@ class BGSprite extends FlxSprite
 		if (idleAnim != null)
 		{
 			// KadeEngine is bad it be lookin like dream.
-			animation.play('dance');
+			animation.play('dance', true);
 		}
 	}
 }
