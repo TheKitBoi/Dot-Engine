@@ -216,7 +216,9 @@ typedef Animation =
 	 * Symbol Name
 	 */
 	var SN:String;
+
 	var TL:Timeline;
+
 	/**
 	 * Symbol Type Instance
 	 * NOT used in symbols, only the main AN animation.
@@ -240,6 +242,7 @@ typedef Timeline =
 typedef Layer =
 {
 	var LN:String;
+
 	/**
 	 * Frames
 	 */
@@ -249,10 +252,12 @@ typedef Layer =
 typedef Frame =
 {
 	var I:Int;
+
 	/**
 	 * Duration, in frames
 	 */
 	var DU:Int;
+
 	/**
 	 * Elements
 	 */
@@ -271,6 +276,7 @@ typedef Element =
 typedef SymbolInstance =
 {
 	var SN:String;
+
 	/**
 	 * SymbolType (Graphic, Movieclip, Button)
 	 */
@@ -294,6 +300,7 @@ typedef TransformationPoint =
 	var y:Float;
 }
 
-typedef AtlasMetaData = {
+typedef AtlasMetaData =
+{
 	var FRT:Int;
 }
